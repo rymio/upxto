@@ -296,7 +296,7 @@ Inside TUI:
   Press L at project prompt to list saved projects
   Navigate left panel to fresh folder, press Ctrl+A
   Navigate right panel to production folder, press Ctrl+S
-  Use F3 diff, F5 copy selected new file, F9 mkdir, F10 update
+  Use F3 diff, F5 copy selected new file, F6 deploy, F9 mkdir
 
 Options:
   --tui                      Open project-aware two-panel folder browser
@@ -632,7 +632,7 @@ fn run_tui(
                         Err(err) => format!("F9 mkdir failed: {err}"),
                     };
                 }
-                KeyCode::F(10) => {
+                KeyCode::F(6) => {
                     draw_spinner(
                         &mut terminal.stdout,
                         &mut spinner,
@@ -644,7 +644,7 @@ fn run_tui(
                             right.refresh()?;
                             result
                         }
-                        Err(err) => format!("F10 update failed: {err}"),
+                        Err(err) => format!("F6 deploy failed: {err}"),
                     };
                 }
                 _ => {}
@@ -1185,7 +1185,7 @@ fn deploy_updates_from_tui(state: &mut State, state_file: &Path) -> DynResult<St
     let summary = reindex_existing_roots(state, state_file)?;
 
     Ok(format!(
-        "F10 deployed {deploy_count} new/updated files; {summary}"
+        "F6 deployed {deploy_count} new/updated files; {summary}"
     ))
 }
 
@@ -1379,7 +1379,7 @@ fn draw_tui(
         SetForegroundColor(Color::DarkGrey),
         Print(fit_text(
             &format!(
-                "F1 help | Tab panel | Enter open | Backspace/.. up | Ctrl+A fresh | Ctrl+S prod | F3 diff | F5 new | F8 backup | F9 mkdir | F10 update | {}",
+                "F1 help | Tab panel | Enter open | Backspace/.. up | Ctrl+A fresh | Ctrl+S prod | F3 diff | F5 new | F6 deploy | F8 backup | F9 mkdir | {}",
                 message
             ),
             width as usize
@@ -1768,10 +1768,10 @@ fn draw_help_view(stdout: &mut Stdout) -> DynResult<()> {
         "  Ctrl+S           Index current right folder as production",
         "  F3               Show side-by-side diff for selected changed file",
         "  F5               Copy selected NEW file from fresh to production",
+        "  F6               Deploy all NEW and UPDATE files to production",
         "  F7               Show copyright and license",
         "  F8               Back up the full production folder",
         "  F9               Create folder in active panel",
-        "  F10              Deploy all NEW and UPDATE files to production",
         "  q or Esc         Quit",
         "",
         "Diff view",

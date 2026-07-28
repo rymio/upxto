@@ -53,7 +53,7 @@ Inside the TUI:
 4. Press `Ctrl+S` to index it as production.
 5. Use `F3` to inspect changes.
 6. Use `F8` to back up production.
-7. Use `F10` to deploy all new/changed files.
+7. Use `F6` to deploy all new/changed files.
 
 ## TUI Keys
 
@@ -72,10 +72,10 @@ Inside the TUI:
 | `F1` | Help |
 | `F3` | Side-by-side diff for selected changed file |
 | `F5` | Copy selected `NEW` file to production |
+| `F6` | Deploy all `NEW` and `UPDATE` files |
 | `F7` | About, copyright, and license |
 | `F8` | Back up production |
 | `F9` | Create folder in active panel |
-| `F10` | Deploy all `NEW` and `UPDATE` files |
 | `q` / Esc | Quit or return from popup |
 
 ## Command-Line Workflow
